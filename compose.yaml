@@ -1,0 +1,37 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: realview/lamp:1.0
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+    volumes:
+      - ./html:/var/www/html
+    networks:
+      - lamp-network
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: realviewdb
+    volumes:
+      - ./mysql:/var/lib/mysql
+    networks:
+      - lamp-network
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+    networks:
+      - lamp-network
+      
+networks:
+  lamp-network:
+    driver: bridge
