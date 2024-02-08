@@ -1,6 +1,6 @@
 <?php
 function OpenCon(){
-	$dbhost = "realview-db-1"; //if pulling directly from github  this could be "realview-master-db-1", double check with docker ps on the correct name to use
+	$dbhost = "db";
 	$dbuser = "root";
 	$dbpass = "root";
 	$dbname = "realviewdb";
